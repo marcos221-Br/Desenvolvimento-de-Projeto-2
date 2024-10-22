@@ -1,5 +1,6 @@
 package api.utfpr.projeto2.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +16,8 @@ import api.utfpr.projeto2.repositories.UserRepository;
 @Configuration
 public class AuthenticationConfig {
     
-    private final UserRepository userRepository;
-
-    public AuthenticationConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Bean
     UserDetailsService userDetailsService() {

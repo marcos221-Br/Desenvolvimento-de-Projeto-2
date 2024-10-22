@@ -57,6 +57,11 @@ public class User implements UserDetails{
         this.type = type;
     }
 
+    public User(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

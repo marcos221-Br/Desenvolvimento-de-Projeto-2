@@ -2,6 +2,7 @@ package api.utfpr.projeto2.configs;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,17 +22,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter{
-     
-    private final HandlerExceptionResolver handlerExceptionResolver;
+    
+    @Autowired
+    private HandlerExceptionResolver handlerExceptionResolver;
 
-    private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private JwtService jwtService;
 
-    public AuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, HandlerExceptionResolver handlerExceptionResolver) {
-        this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
-        this.handlerExceptionResolver = handlerExceptionResolver;
-    }
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {

@@ -17,12 +17,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "teachersmessages")
+@Table(name = "usersmessages")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class TeacherMessage implements Serializable{
+public class UserMessage implements Serializable{
     
     private static final long serialVersionUID = 1L;
 
@@ -34,8 +34,8 @@ public class TeacherMessage implements Serializable{
 
     @Basic(optional = false)
     @ManyToOne
-    @JoinColumn(name = "teacher", referencedColumnName = "id")
-    private Teacher teacher;
+    @JoinColumn(name = "user", referencedColumnName = "id")
+    private User user;
 
     @Basic(optional = false)
     @ManyToOne
@@ -46,8 +46,8 @@ public class TeacherMessage implements Serializable{
     @Column(name = "read")
     private Boolean read;
 
-    public TeacherMessage(Teacher teacher, Message message, Boolean read){
-        this.teacher = teacher;
+    public UserMessage(User user, Message message, Boolean read){
+        this.user = user;
         this.message = message;
         this.read = read;
     }

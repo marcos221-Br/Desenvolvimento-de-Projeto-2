@@ -1,11 +1,14 @@
 package api.utfpr.projeto2.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import api.utfpr.projeto2.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 import api.utfpr.projeto2.models.UserMessage;
 
 public interface UserMessageRepository extends JpaRepository<UserMessage,Integer> {
     
-    public UserMessage findByUser(User user);
+    @Query(value = "SELECT * FROM usersmessages WHERE user = ?", nativeQuery = true)
+    public List<UserMessage> findByUser(Integer user);
 }

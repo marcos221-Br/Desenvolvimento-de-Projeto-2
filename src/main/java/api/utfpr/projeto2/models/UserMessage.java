@@ -43,7 +43,7 @@ public class UserMessage implements Serializable{
     private Message message;
 
     @Basic(optional = false)
-    @Column(name = "read")
+    @Column(name = "messageread")
     private Boolean read;
 
     public UserMessage(User user, Message message, Boolean read){

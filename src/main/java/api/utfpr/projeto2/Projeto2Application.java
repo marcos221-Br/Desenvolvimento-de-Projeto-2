@@ -17,6 +17,7 @@ public class Projeto2Application {
 		SpringApplication.run(Projeto2Application.class, args);
 	}
 
+	@SuppressWarnings("unused")
 	@Bean
 	CommandLineRunner createDirectory(MessageService messageService){
 		return (args) -> {

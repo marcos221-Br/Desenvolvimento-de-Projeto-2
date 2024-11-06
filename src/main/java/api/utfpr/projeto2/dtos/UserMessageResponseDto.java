@@ -13,8 +13,9 @@ public class UserMessageResponseDto {
     private Integer id;
     private UserResponseDto user;
     private Message message;
+    private Boolean read;
 
     public static UserMessageResponseDto userMessageDto(UserMessage userMessage){
-        return new UserMessageResponseDto(userMessage.getId(), UserResponseDto.userDto(userMessage.getUser()), userMessage.getMessage());
+        return new UserMessageResponseDto(userMessage.getId(), UserResponseDto.userDto(userMessage.getUser()), userMessage.getMessage(), userMessage.getRead());
     }
 }

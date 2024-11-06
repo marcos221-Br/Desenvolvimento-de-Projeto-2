@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import api.utfpr.projeto2.configs.StorageConfig;
 import api.utfpr.projeto2.exceptions.AlreadyExistsExeption;
-import api.utfpr.projeto2.exceptions.DiferentNameExeption;
 import api.utfpr.projeto2.exceptions.StorageException;
 import api.utfpr.projeto2.exceptions.StorageFileNotFoundException;
 import api.utfpr.projeto2.models.Message;
@@ -46,7 +45,8 @@ public class MessageService {
 
     public Message createMessage(MultipartFile file){
         Message message = new Message();
-        Path destinationFile = this.rootLocation.resolve(Paths.get(file.getOriginalFilename())).normalize().toAbsolutePath();
+        @SuppressWarnings("null")
+        Path destinationFile = this.rootLocation.resolve(System.currentTimeMillis()+"."+file.getContentType().split("/")[1]).normalize().toAbsolutePath();
         try(InputStream inputStream = file.getInputStream()){
             Files.copy(inputStream, destinationFile);
             message.setMessage(destinationFile.getFileName()+"");
@@ -56,20 +56,15 @@ public class MessageService {
         }
     }
 
-    @SuppressWarnings("null")
     public Message updateMessage(Integer id, MultipartFile file){
         Message message = this.messageRepository.getReferenceById(id);
-        if(!file.getOriginalFilename().equals(message.getMessage())){
-            throw new DiferentNameExeption("O nome do arquivo enviado é diferente do atual!");
-        }else{
-            Path destinationFile = this.rootLocation.resolve(Paths.get(file.getOriginalFilename())).normalize().toAbsolutePath();
-            try(InputStream inputStream = file.getInputStream()){
-                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-                message.setMessage(destinationFile.getFileName()+"");
-                return message;
-            }catch(IOException e){
-                throw new StorageException("Falha ao armazenar Imagem");
-            }
+        Path destinationFile = this.rootLocation.resolve(message.getMessage()).normalize().toAbsolutePath();
+        try(InputStream inputStream = file.getInputStream()){
+            Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+            message.setMessage(destinationFile.getFileName()+"");
+            return message;
+        }catch(IOException e){
+            throw new StorageException("Falha ao armazenar Imagem");
         }
     }
 

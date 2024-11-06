@@ -25,6 +25,6 @@ public class AuthenticationController {
     @PostMapping("/login")
     public LoginResponseDto authenticate(@RequestBody LoginDto loginDto) {
         User authenticatedUser = authenticationService.authenticate(loginDto.userObject());
-        return LoginResponseDto.loginDto(jwtService.generateToken(authenticatedUser),jwtService.getExpirationTime());
+        return LoginResponseDto.loginDto(jwtService.generateToken(authenticatedUser),jwtService.getExpirationTime(),authenticatedUser);
     }
 }

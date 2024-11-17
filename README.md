@@ -63,13 +63,13 @@ Todas as requisições são realizadas por meio de protocolos *HTTP* definidos n
 > DELETE /api/user/${id}
 ```
 
-| Requisição |   Onde   | Parâmetro                         | Tipo                                 | Descrição                                                 | **Retorno**                   | Tipo                                 |
-| :----------: | :-------: | ---------------------------------- | ------------------------------------ | ----------------------------------------------------------- | ----------------------------------- | ------------------------------------ |
-|     GET     |          |                                    |                                      |                                                             | `List<{ id, name, email, type }>` | `Integer, String, String, Integer` |
-|     GET     |    URL    | `email`                          | `String`                           | **Obrigatório.** O Email do usuário que você quer | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
-|     POST     |   Body   | `{ name, email, type }`          | `String, String, Integer`          | **Obrigatório** Name, Email, Password e Type.      | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
-|     PUT     | URL, Body | `id`, `{ name, email, type }` | `Integer, String, String, Integer` | **Obrigatório** Id, Name, Email, Password, e Type.  | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
-|    DELETE    |    URL    | `id`                             | `Integer`                          | **Obrigatório.** O Id do usuário que você quer    | `null`                            |                                      |
+| Requisição |   Onde   | Parâmetro                                   | Tipo                                         | Descrição                                                 | **Retorno**                   | Tipo                                 |
+| :----------: | :-------: | -------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------- | ------------------------------------ |
+|     GET     |          |                                              |                                              |                                                             | `List<{ id, name, email, type }>` | `Integer, String, String, Integer` |
+|     GET     |    URL    | `email`                                    | `String`                                   | **Obrigatório.** O Email do usuário que você quer | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
+|     POST     |   Body   | `{ name, email, password, type }`          | `String, String, String, Integer`          | **Obrigatório** Name, Email, Password e Type.      | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
+|     PUT     | URL, Body | `id`, `{ name, email, password, type }` | `Integer, String, String, String, Integer` | **Obrigatório** Id, Name, Email, Password, e Type.  | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
+|    DELETE    |    URL    | `id`                                       | `Integer`                                  | **Obrigatório.** O Id do usuário que você quer    | `null`                            |                                      |
 
 #### Documentos
 

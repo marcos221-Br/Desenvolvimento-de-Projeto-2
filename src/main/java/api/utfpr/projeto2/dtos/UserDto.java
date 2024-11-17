@@ -1,13 +1,12 @@
 package api.utfpr.projeto2.dtos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import api.utfpr.projeto2.models.User;
-import lombok.AllArgsConstructor;
 import lombok.ToString;
 
-@AllArgsConstructor
 @ToString
 public class UserDto {
 
@@ -18,6 +17,14 @@ public class UserDto {
     private String email;
     private String password;
     private Integer type;
+
+    public UserDto(PasswordEncoder passwordEncoder, String name, String email, String password, Integer type) {
+        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.type = type;
+    }
 
     public User userObject(){
         return new User(name, email, passwordEncoder.encode(password), type);

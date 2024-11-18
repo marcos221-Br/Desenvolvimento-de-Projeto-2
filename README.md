@@ -30,7 +30,7 @@ Realizando a Instalação
 
 #### Diagrama do banco
 
-![DB Screenshot](documentation\db.png)
+![DB Screenshot](documentation/db.png)
 
 #### Endpoints
 

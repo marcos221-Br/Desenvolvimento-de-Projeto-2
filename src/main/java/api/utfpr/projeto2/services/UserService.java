@@ -28,6 +28,10 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public List<User> getAllUsersByType(Integer type){
+        return this.userRepository.findAllUsersByType(type);
+    }
+
     public User getUserByEmail(String email){
         return this.userRepository.findByEmail(email).get();
     }

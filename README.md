@@ -58,6 +58,7 @@ Todas as requisições são realizadas por meio de protocolos *HTTP* definidos n
 ```http
 > GET /api/user
 > GET /api/user/${login}
+> GET /api/user/type/${type}
 > POST /api/user
 > PUT /api/user/${id}
 > DELETE /api/user/${id}
@@ -67,6 +68,7 @@ Todas as requisições são realizadas por meio de protocolos *HTTP* definidos n
 | :----------: | :-------: | -------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------- | ------------------------------------ |
 |     GET     |          |                                              |                                              |                                                             | `List<{ id, name, email, type }>` | `Integer, String, String, Integer` |
 |     GET     |    URL    | `email`                                    | `String`                                   | **Obrigatório.** O Email do usuário que você quer | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
+|     GET     |    URL    | `type`                                     | `Integer`                                  | **Obrigatório.** O Tipo do usuário que você quer  | `List<{ id, name, email, type }>` | `Integer, String, String, Integer` |
 |     POST     |   Body   | `{ name, email, password, type }`          | `String, String, String, Integer`          | **Obrigatório** Name, Email, Password e Type.      | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
 |     PUT     | URL, Body | `id`, `{ name, email, password, type }` | `Integer, String, String, String, Integer` | **Obrigatório** Id, Name, Email, Password, e Type.  | `{ id, name, email, type }`       | `Integer, String, String, Integer` |
 |    DELETE    |    URL    | `id`                                       | `Integer`                                  | **Obrigatório.** O Id do usuário que você quer    | `null`                            |                                      |

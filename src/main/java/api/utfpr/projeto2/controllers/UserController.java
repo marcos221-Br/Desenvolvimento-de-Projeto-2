@@ -40,6 +40,16 @@ public class UserController {
         return userResponseDtos;
     }
 
+    @GetMapping("/type/{type}")
+    public List<UserResponseDto> getAllUsersByType(@PathVariable Integer type){
+        List<User> users = this.userService.getAllUsersByType(type);
+        List<UserResponseDto> userResponseDtos = new ArrayList<>();
+        for(User user : users){
+            userResponseDtos.add(UserResponseDto.userDto(user));
+        }
+        return userResponseDtos;
+    }
+
     @GetMapping("/{email}")
     public UserResponseDto getUser(@PathVariable String email){
         return UserResponseDto.userDto(this.userService.getUserByEmail(email));

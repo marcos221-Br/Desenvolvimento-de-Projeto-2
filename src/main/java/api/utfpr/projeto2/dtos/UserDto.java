@@ -18,7 +18,7 @@ public class UserDto {
     private String password;
     private Integer type;
 
-    public UserDto(PasswordEncoder passwordEncoder, String name, String email, String password, Integer type) {
+    public UserDto(String name, String email, String password, Integer type) {
         this.passwordEncoder = new BCryptPasswordEncoder();
         this.name = name;
         this.email = email;

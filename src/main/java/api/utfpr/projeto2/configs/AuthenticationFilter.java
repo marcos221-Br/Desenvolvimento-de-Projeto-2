@@ -71,6 +71,7 @@ public class AuthenticationFilter extends OncePerRequestFilter{
 
             filterChain.doFilter(request, response);
         } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
     }

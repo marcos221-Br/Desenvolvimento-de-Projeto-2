@@ -3,8 +3,10 @@ package api.utfpr.projeto2.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+import api.utfpr.projeto2.exceptions.UnauthorizedException;
 import api.utfpr.projeto2.models.User;
 import api.utfpr.projeto2.repositories.UserRepository;
 
@@ -18,7 +20,11 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     public User authenticate(User user){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-        return userRepository.findByEmail(user.getEmail()).orElseThrow();
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+            return userRepository.findByEmail(user.getEmail()).orElseThrow();
+        }catch(AuthenticationException e){
+            throw new UnauthorizedException("Email ou Senha incorreta!");
+        }
     }
 }

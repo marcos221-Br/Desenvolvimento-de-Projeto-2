@@ -21,8 +21,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 
-    @ExceptionHandler(AlreadyExistsExeption.class)
-    private ResponseEntity<RestErrorMessage> alreadyExistsHandler(AlreadyExistsExeption exception){
+    @ExceptionHandler(AlreadyExistsException.class)
+    private ResponseEntity<RestErrorMessage> alreadyExistsHandler(AlreadyExistsException exception){
         RestErrorMessage response = new RestErrorMessage(HttpStatus.CONFLICT, exception.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
@@ -31,5 +31,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<RestErrorMessage> storageFileNotFoundHandler(StorageFileNotFoundException exception){
         RestErrorMessage response = new RestErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    private ResponseEntity<RestErrorMessage> unauthorizedHandler(UnauthorizedException exception){
+        RestErrorMessage response = new RestErrorMessage(HttpStatus.UNAUTHORIZED, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 }

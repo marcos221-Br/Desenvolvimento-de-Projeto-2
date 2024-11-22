@@ -9,12 +9,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import api.utfpr.projeto2.services.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,8 +72,13 @@ public class AuthenticationFilter extends OncePerRequestFilter{
             }
 
             filterChain.doFilter(request, response);
-        } catch (Exception e) {
+        } catch(UsernameNotFoundException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            handlerExceptionResolver.resolveException(request, response, null, e);
+        } catch(ExpiredJwtException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            handlerExceptionResolver.resolveException(request, response, null, e);
+        } catch (Exception e) {
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
     }

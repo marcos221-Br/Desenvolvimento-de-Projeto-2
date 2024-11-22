@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import api.utfpr.projeto2.configs.StorageConfig;
-import api.utfpr.projeto2.exceptions.AlreadyExistsExeption;
+import api.utfpr.projeto2.exceptions.AlreadyExistsException;
 import api.utfpr.projeto2.exceptions.StorageException;
 import api.utfpr.projeto2.exceptions.StorageFileNotFoundException;
 import api.utfpr.projeto2.models.Message;
@@ -52,7 +52,7 @@ public class MessageService {
             message.setMessage(destinationFile.getFileName()+"");
             return this.messageRepository.save(message);
         }catch(IOException e) {
-            throw new AlreadyExistsExeption("Messagem duplicada enviada!");
+            throw new AlreadyExistsException("Messagem duplicada enviada!");
         }
     }
 

@@ -26,8 +26,12 @@ public class UserMessageController {
     private UserMessageService userMessageService;
 
     @PostMapping
-    public UserMessageResponseDto createUserMessage(@RequestBody UserMessageDto userMessageDto){
-        return UserMessageResponseDto.userMessageDto(this.userMessageService.createUserMessage(userMessageDto.userMessageObject()));
+    public List<UserMessageResponseDto> createUserMessage(@RequestBody UserMessageDto userMessageDto){
+        List<UserMessageResponseDto> userMessageResponseDtos = new ArrayList<>();
+        for (UserMessage userMessage : userMessageDto.userMessageObject()) {
+            userMessageResponseDtos.add(UserMessageResponseDto.userMessageDto(this.userMessageService.createUserMessage(userMessage)));
+        }
+        return userMessageResponseDtos;
     }
 
     @GetMapping
@@ -52,7 +56,7 @@ public class UserMessageController {
 
     @PutMapping("/{id}")
     public UserMessageResponseDto updateUserMessageResponse(@PathVariable Integer id, @RequestBody UserMessageDto userMessageDto){
-        return UserMessageResponseDto.userMessageDto(this.userMessageService.updateUserMessage(id, userMessageDto.userMessageObject()));
+        return UserMessageResponseDto.userMessageDto(this.userMessageService.updateUserMessage(id, userMessageDto.userMessageObject().get(0)));
     }
 
     @DeleteMapping("/{id}")

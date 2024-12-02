@@ -105,8 +105,8 @@ Todas as requisições são realizadas por meio de protocolos *HTTP* definidos n
 | :----------: | :-------: | ------------------------------------ | -------------------------- | --------------------------------------------------------------------------------- | ------------------------------------- | ----------------------------------- |
 |     GET     |          |                                      |                            |                                                                                   | `List<{ id, user, message, read }>` | `Integer, User, Message, Boolean` |
 |     GET     |    URL    | `user`                             | `Integer`                | **Obrigatório**. O Id do Usuário que você quer                           | `{ id, user, message, read }`       | `Integer, User, Message, Boolean` |
-|     POST     |   Body   | `{ user, message, read }`          | `User, Message, Boolean` | **Obrigatório** User e Message e Read.                                    | `{ id, user, message, read }`       | `Integer, User, Message, Boolean` |
-|     PUT     | URL, Body | `id`, `{ user, message, read }` | `User, Message, Boolean` | **Obrigatório** Id, User e Message e Read.                                | `{ id, user, message, read }`       | `Integer, User, Message, Boolean` |
+|     POST     |   Body   | `{ users, message, read }`          | `List<User>, Message, Boolean` | **Obrigatório** Users e Message e Read.                                    | `List<{ id, user, message, read }>`       | `Integer, User, Message, Boolean` |
+|     PUT     | URL, Body | `id`, `{ users, message, read }` | `List<User>, Message, Boolean` | **Obrigatório** Id, Users e Message e Read.                                | `List<{ id, user, message, read }>`       | `Integer, User, Message, Boolean` |
 |    DELETE    |    URL    | `id`                               | `Integer`                | **Obrigatório**. O Id do vínculo entre mensagem e usuário que você quer | `null`                              |                                     |
 
 ## Solução de problemas
